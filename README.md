@@ -1,3 +1,5 @@
+
+
 # PropFlow Catalyst for Unreal Engine
 ![Unreal Engine](https://img.shields.io/badge/UnrealEngine-5-blue?logo=unrealengine) ![License](https://img.shields.io/badge/License-MIT-green) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ZarzaNg/AruEditorUtilities)
 
@@ -77,7 +79,7 @@ struct FMyCustomFilter : public FAruFilter
     GENERATED_BODY()
 public:
     virtual ~FMyCustomFilter() override {};
-    virtual bool IsConditionMet(const FProperty* InProperty, const void* InValue) const override
+    virtual bool IsConditionMet(const FProperty* InProperty, const void* InValue, const FInstancedPropertyBag& InParameters) const override
     {
         // Your custom condition check logic here
         // InProperty: Metadata of the current property
@@ -98,7 +100,7 @@ struct FMyCustomAction : public FAruPredicate
     GENERATED_BODY()
 public:
     virtual ~FMyCustomAction() override {};
-    virtual bool Execute(const FProperty* InProperty, void* InValue) const override
+    virtual bool Execute(const FProperty* InProperty, void* InValue, const FInstancedPropertyBag& InParameters) const override
     {
         // Example: Double integer properties
         if (FIntProperty* IntProp = CastField<FIntProperty>(InProperty))
@@ -197,4 +199,3 @@ We expanded proxy coverage so filters can perform Blueprint-defined checks acros
   3. At runtime, the predicate chooses the appropriate `Process*` entry based on property type and writes the returned value back.
 
 > Predicate proxy lets you transform target values in Blueprint per type, then write them back during execution.
-
